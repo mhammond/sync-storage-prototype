@@ -73,8 +73,8 @@ fn create_uuid() -> Uuid {
 
 fn return_date_field(results: QueryExecutionResult) -> Result<Option<Timespec>, list_errors::Error> {
     results.into_scalar_result()
-        .map(|o| o.and_then(|ts| ts.to_inner()))
-        .map_err(|e| e.into())
+            .map(|o| o.and_then(|ts| ts.to_inner()))
+            .map_err(|e| e.into())
 }
 
 impl Toodle {
@@ -260,11 +260,11 @@ impl Toodle {
     pub fn create_item(&mut self, item: &Item) -> Result<Uuid, list_errors::Error> {
         // TODO: make this mapping better!
         let label_str = item.labels
-            .iter()
-            .filter(|label| label.id.is_some() )
-            .map(|label|  format!("{}", label.id.clone().map::<i64, _>(|e| e.into()).unwrap()) )
-            .collect::<Vec<String>>()
-            .join(", ");
+                            .iter()
+                            .filter(|label| label.id.is_some() )
+                            .map(|label|  format!("{}", label.id.clone().map::<i64, _>(|e| e.into()).unwrap()) )
+                            .collect::<Vec<String>>()
+                            .join(", ");
         let item_uuid = create_uuid();
         let uuid_string = item_uuid.hyphenated().to_string();
         let mut query = format!(r#"[{{
